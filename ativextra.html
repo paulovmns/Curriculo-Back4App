@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parse/3.3.1/parse.min.js" integrity="sha512-pD+Z+o1kNqJJWBHNIJdCVW6aLD0OLGiQq+lQwacqW9+xWT7f1nH11EFSgfITSZL+QQ4AhsBA0koTKWXyKrR7mw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Curriculum Vitae</title>
+</head>
+<body>
+  <div class="side-navbar active-nav d-flex justify-content-between flex-wrap flex-column" id="sidebar">
+    <ul class="nav flex-column text-white w-100">
+      <li class="nav-link h4 text-white my-3">
+        CURRICULUM </br>VITAE
+      </li>
+      <li><a href="index.html" class="nav-link">
+        <span class="mx-2">Início</span>
+      </a></li>
+      <li><a href="experiencias.html" class="nav-link">
+        <span class="mx-2">Experiência</span>
+        </a></li>
+        <li><a href="academica.html" class="nav-link">
+        <span class="mx-2">Formação Acadêmica</span>
+      </a></li>
+      <li><a href="hobbies.html" class="nav-link">
+        <span class="mx-2">Hobbies</span>
+      </a></li>
+      <li><a href="ativextra.html" class="nav-link">
+        <span class="mx-2">Atividades Extras</span>
+      </a></li>
+      <li><a href="contato.html" class="nav-link">
+        <span class="mx-2">Contato</span>
+      </a></li>
+    </ul>
+
+
+  </div>
+
+  <div class="p-3 my-container active-cont">
+
+    <h4 class="text-dark p-4">Atividades Extracurriculares</h4>
+    
+    <h5 class="p-2 bg-secondary text-white">Atualização Realizada via Back4App</h5>
+    <br>
+
+            <p class="fw-bold">Aulas de Violino, <em>Conservatório Pernambuco de Música</em></p>
+            <p class="px-3 text-decoration-underline">Fevereiro/2018 - Abril/2020</p>
+            <ul id="atv1"></ul>
+                <p class="fw-bold">Voluntariado, <em>Casa do Estudante - UFPE</em></p>
+                <p class="px-3 text-decoration-underline">Junho/2020 - Agosto/2020</p>
+                <ul id="atv2"></ul>
+                <p class="fw-bold">Voluntariado, <em>Biblioteca Pública do Recife</em></p>
+                <p class="px-3 text-decoration-underline">Setembro/2020 - Janeiro/2021</p>
+                <ul id="atv3"></ul>
+
+  </div>
+
+  <script>
+    Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
+    // Remember to inform BOTH the Back4App Application ID AND the JavaScript KEY
+    Parse.initialize(
+      '4ZC1BxfxXiOviT9rsTGtqPAP7cN27VjgYcplmo40', // This is your Application ID
+      'PPzpR589RFyrUnop016qyJYymOr7nNdflHFqsOiM' // This is your Javascript key
+    );
+
+    let listaAtv1 = document.getElementById("atv1");
+    let listaAtv2 = document.getElementById("atv2");
+    let listaAtv3 = document.getElementById("atv3");
+
+    const exibirAtv1 = async () => {
+      const atv1 = Parse.Object.extend("atv1");
+      const query = new Parse.Query(atv1);
+      listaAtv1.innerHTML = "";
+      try {
+        const results = await query.find();
+        for (const object of results) {
+          const texto = object.get("texto");
+          listaAtv1.innerHTML += `<li>${texto}</li>`;
+        }
+      } catch (error) {
+        console.error("Error while fetching Atv1", error);
+      }
+    };
+
+    const exibirAtv2 = async () => {
+      const atv2 = Parse.Object.extend("atv2");
+      const query = new Parse.Query(atv2);
+      listaAtv2.innerHTML = "";
+      try {
+        const results = await query.find();
+        for (const object of results) {
+          const texto = object.get("texto");
+          listaAtv2.innerHTML += `<li>${texto}</li>`;
+        }
+      } catch (error) {
+        console.error("Error while fetching Atv2", error);
+      }
+    };
+
+    const exibirAtv3 = async () => {
+      const atv3 = Parse.Object.extend("atv3");
+      const query = new Parse.Query(atv3);
+      listaAtv3.innerHTML = "";
+      try {
+        const results = await query.find();
+        for (const object of results) {
+          const texto = object.get("texto");
+          listaAtv3.innerHTML += `<li>${texto}</li>`;
+        }
+      } catch (error) {
+        console.error("Error while fetching Atv3", error);
+      }
+    };
+
+    exibirAtv1();
+    exibirAtv2();
+    exibirAtv3();
+
+  </script>
+
+
+</body>
+</html>
